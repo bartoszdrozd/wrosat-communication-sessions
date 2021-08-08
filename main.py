@@ -4,13 +4,15 @@ import re
 import matplotlib.pyplot as plt
 
 df = pd.read_csv('Facility-Facility1-To-Satellite-SSO590_Access.csv', index_col='Access')
+df.describe()
+# #one fuction to show data about accesses in one specific csv file
+column = df['Duration (sec)']
+max_value = int(column.max())
+durationList= list(range(50,max_value+50,50))
+itemIndex = [0] * len(durationList)
 
-# date_format = '4 Aug 2021 13:38:39.198'
 
-# #one fuction to show data about specific access
-durationList= list(range(50,550,50))
-itemIndex = [0,0,0,0,0,0,0,0,0,0]
-
+#improve that loop so it automatically sets limit value 
 for i in range(1, len(df)):
 	if df['Duration (sec)'][i] < 50:
 		itemIndex[0] += 1
@@ -33,6 +35,8 @@ for i in range(1, len(df)):
 	elif df['Duration (sec)'][i] < 500:
 		itemIndex[9] += 1
 
+print(itemIndex)
+
 y_pos = np.arange(len(itemIndex))
 plt.bar(y_pos, itemIndex, align='center', alpha=0.5)
 plt.xticks(y_pos, durationList)
@@ -42,6 +46,6 @@ plt.title('Access Duration')
 plt.show()
 
 #second function to show data about time in beetween two consequetive accesses
-
+# date_format = '4 Aug 2021 13:38:39.198'
 def AccessCalc(date_utcg):
 	m = re.serach('', date_utcg)
