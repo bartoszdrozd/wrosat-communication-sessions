@@ -1,17 +1,25 @@
+import os
 import pandas as pd
 import numpy as np
 import re
 import matplotlib.pyplot as plt
 
+pathName = os.getcwd()
+
+numFiles = []
+fileNames = os.listdir(pathName)
+for fileNames in fileNames:
+    if fileNames.endswith(".csv"):
+        numFiles.append(fileNames)
+
 df = pd.read_csv('Facility-Facility1-To-Satellite-SSO590_Access.csv', index_col='Access')
-df.describe()
-# #one fuction to show data about accesses in one specific csv file
+
 column = df['Duration (sec)']
 max_value = int(column.max())
 durationList= list(range(50,max_value+50,50))
 itemIndex = [0] * len(durationList)
 
-
+#one fuction to show data about accesses in one specific csv file
 #improve that loop so it automatically sets limit value 
 for i in range(1, len(df)):
 	if df['Duration (sec)'][i] < 50:
@@ -34,6 +42,8 @@ for i in range(1, len(df)):
 		itemIndex[8] += 1
 	elif df['Duration (sec)'][i] < 500:
 		itemIndex[9] += 1
+	elif df['Duration (sec)'][i] < 550:
+		itemIndex[10] += 1
 
 print(itemIndex)
 
