@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 import numpy as np
+import time
+import calendar
 import re
 import matplotlib.pyplot as plt
 
@@ -55,7 +57,9 @@ plt.ylabel('Sec')
 plt.title('Access Duration')
 plt.show()
 
+
 #second function to show data about time in beetween two consequetive accesses
 # date_format = '4 Aug 2021 13:38:39.198'
+# calendar.timegm(time.strptime(date_format, '%e %b %Y  %H:%M:%S.%f'))
 def AccessCalc(date_utcg):
 	m = re.serach('', date_utcg)
