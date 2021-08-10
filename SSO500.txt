@@ -1,0 +1,3 @@
+Max access time: 442
+Median of access times: 381.68600000000004
+Mean access time: 346.10710597826085
