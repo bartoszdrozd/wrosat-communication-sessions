@@ -66,5 +66,34 @@ plt.savefig(f'{file_name}.png')
 #second function to show data about time in beetween two consequetive accesses
 # date_format = '4 Aug 2021 13:38:39.198'
 # calendar.timegm(time.strptime(date_format, '%e %b %Y  %H:%M:%S.%f'))
-def AccessCalc(date_utcg):
-	m = re.serach('', date_utcg)
+
+def AccessCalc(df):
+	window_list = []
+	time_ranges = [0,0,0,0,0]
+	times = [5400,27900,33425,36200,41775]
+	for i in range(1, len(df)):
+		if df['Stop Time (UTCG)'][i] and df['Start Time (UTCG)'][i+1]:
+			access_end = calendar.timegm(time.strptime(df['Stop Time (UTCG)'][i], '%d %b %Y  %H:%M:%S.%f'))
+			next_access_start = calendar.timegm(time.strptime(df['Start Time (UTCG)'][i+1], '%d %b %Y  %H:%M:%S.%f'))
+			window_time = next_access_start - access_end
+			window_list.append(window_time)
+			if 5200 < window_time < 5600:
+				time_ranges[0] += 1
+			elif 27800 < window_time < 28000:
+				time_ranges[1] += 1
+			elif 33400 < window_time < 33450:
+				time_ranges[2] += 1
+			elif 36100 < window_time < 36300:
+				time_ranges[3] += 1
+			elif 41700 < window_time < 41850:
+				time_ranges[4] += 1
+		else:
+			return
+
+	y_pos2 = np.arange(len(time_ranges))
+	plt.bar(y_pos2, time_ranges, align='center')
+	plt.xticks(y_pos2, times)
+	plt.show()
+	print(window_list)
+
+AccessCalc(df)
