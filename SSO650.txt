@@ -1,2 +1,0 @@
-Median of access times: 465.032
-Mean access time: 421.5295387755102
