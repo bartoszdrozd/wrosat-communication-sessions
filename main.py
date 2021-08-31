@@ -31,6 +31,7 @@ for fileName in fileNames:
 		document.add_picture(f'figures/{file_name}.png')
 		access_calculation(df, file_name)
 		document.add_picture(f'figures/length_of_silence_for_{file_name}.png')
+		document.add_page_break()
 		document.save('raport.docx')
 		csv_counter += 1
 		continue

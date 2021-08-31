@@ -37,7 +37,7 @@ def access_times(df, item_index, duration_list, file_name):
     # 	file.write(f"Mean access time: {df['Duration (sec)'].mean()}")
 
     y_pos = np.arange(len(item_index))
-    plt.figure(0)
+    plt.figure(figsize=(6, 4))
     plt.bar(y_pos, item_index, align='center', alpha=0.5)
     plt.xticks(y_pos, duration_list)
     plt.ylabel('Liczba dostępów')
@@ -61,7 +61,7 @@ def access_calculation(df, file_name):
             window_list.append(window_time)
             date_list.append(df['Stop Time (UTCG)'][i])
 
-    plt.figure()
+    plt.figure(figsize=(6, 4))
     plt.ylabel(f'Długość przerwy radiowej dla {file_name}[s]')
     plt.xlabel('Czas od rozpoczęcia misji')
     plt.title(f'Długość przerw radiowych dla {file_name}')
